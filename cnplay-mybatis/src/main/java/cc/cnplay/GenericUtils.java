@@ -1,4 +1,4 @@
-package cc.cnplay.mybatis;
+package cc.cnplay;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;

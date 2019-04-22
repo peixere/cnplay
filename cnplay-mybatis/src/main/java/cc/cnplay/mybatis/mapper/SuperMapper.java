@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
-import cc.cnplay.mybatis.model.SuperIdEntity;
+import cc.cnplay.model.SuperIdEntity;
 
 @Mapper
 public interface SuperMapper<T extends SuperIdEntity>

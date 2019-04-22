@@ -24,7 +24,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.ibatis.jdbc.SQL;
 
-import cc.cnplay.mybatis.model.SuperIdEntity;
+import cc.cnplay.model.SuperIdEntity;
 import lombok.Getter;
 import lombok.Setter;
 

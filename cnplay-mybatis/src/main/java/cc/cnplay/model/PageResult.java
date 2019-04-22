@@ -1,9 +1,9 @@
-package cc.cnplay.mybatis.model;
+package cc.cnplay.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import cc.cnplay.mybatis.Note;
+import cc.cnplay.Note;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package cc.cnplay.mybatis.model;
+package cc.cnplay.model;
 
 import java.io.Serializable;
 import java.util.UUID;

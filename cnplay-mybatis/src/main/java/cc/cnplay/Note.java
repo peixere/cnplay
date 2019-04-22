@@ -1,4 +1,4 @@
-package cc.cnplay.mybatis;
+package cc.cnplay;
 
 public @interface Note
 {

@@ -34,11 +34,11 @@ public abstract class SuperDateEntity extends SuperIdEntity
 	public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static final String DATE_FORMAT_YMD = "yyyy-MM-dd";
 
-	@ApiModelProperty(notes = "创建时间")
+	@ApiModelProperty(notes = "创建时间", example = "0")
 	@Column(name = "date_create", updatable = false)
 	private Date dateCreate;
 
-	@ApiModelProperty(notes = "更新时间")
+	@ApiModelProperty(notes = "更新时间", example = "0")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_update")
 	private Date dateUpdate;

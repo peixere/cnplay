@@ -20,19 +20,19 @@ public class Page implements Serializable
 	 */
 	private static final long serialVersionUID = -6518359964486465431L;
 
-	@ApiModelProperty(value = "当前页")
+	@ApiModelProperty(value = "当前页", example = "0")
 	private int number = 1;
 
-	@ApiModelProperty(value = "每页行数")
+	@ApiModelProperty(value = "每页行数", example = "0")
 	private int size = 20;
 
-	@ApiModelProperty(value = "当前页起始行,从0开始", hidden = true)
+	@ApiModelProperty(value = "当前页起始行,从0开始", hidden = true, example = "0")
 	private int start;
 
-	@ApiModelProperty(value = "总页数", hidden = true)
+	@ApiModelProperty(value = "总页数", hidden = true, example = "0")
 	private int count;
 
-	@ApiModelProperty(value = "总记录数", hidden = true)
+	@ApiModelProperty(value = "总记录数", hidden = true, example = "0")
 	private int total;
 
 	public int getNumber()

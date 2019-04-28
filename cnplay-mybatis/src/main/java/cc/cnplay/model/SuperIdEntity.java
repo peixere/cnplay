@@ -27,6 +27,7 @@ public abstract class SuperIdEntity implements Serializable
 		return UUID.randomUUID().toString();
 	}
 
+	@ApiModelProperty(value = "主键")
 	@Id()
 	@Column(name = "id", unique = true, nullable = false, length = 36)
 	private String id;

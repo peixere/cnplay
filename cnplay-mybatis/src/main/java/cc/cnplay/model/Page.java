@@ -20,10 +20,10 @@ public class Page implements Serializable
 	 */
 	private static final long serialVersionUID = -6518359964486465431L;
 
-	@ApiModelProperty(value = "当前页", example = "0")
+	@ApiModelProperty(value = "当前页", example = "1")
 	private int number = 1;
 
-	@ApiModelProperty(value = "每页行数", example = "0")
+	@ApiModelProperty(value = "每页行数", example = "20")
 	private int size = 20;
 
 	@ApiModelProperty(value = "当前页起始行,从0开始", hidden = true, example = "0")

@@ -1,9 +1,9 @@
 package cc.cnplay.mybatis.mapper;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cc.cnplay.SnowFlake;
 import cc.cnplay.model.SuperIdEntity;
 
 public class SuperProvider
@@ -32,14 +32,14 @@ public class SuperProvider
 		logger.info(sql);
 		return sql;
 	}
-	
+
 	public String deleteAll(Class<?> clazz)
 	{
 		String sql = Metadata.sqlDeleteAll(clazz);
 		logger.info(sql);
 		return sql;
 	}
-	
+
 	public String delete(SuperIdEntity e)
 	{
 		String sql = Metadata.sqlDeleteById(e);
@@ -77,8 +77,9 @@ public class SuperProvider
 
 	public String insert(SuperIdEntity e)
 	{
-		if(StringUtils.isEmpty(e.getId())) {
-			e.setId(SuperIdEntity.randomId());
+		if (e.getId() != null && e.getId() <= 0)
+		{
+			e.setId(SnowFlake.next());
 		}
 		String sql = Metadata.sqlInsert(e);
 		logger.info(sql);

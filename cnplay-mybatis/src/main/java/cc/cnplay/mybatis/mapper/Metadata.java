@@ -20,16 +20,16 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.ibatis.jdbc.SQL;
 
 import cc.cnplay.model.SuperIdEntity;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
+@Setter(AccessLevel.PROTECTED)
+@Getter(AccessLevel.PROTECTED)
 public class Metadata
 {
 	public final static Map<Class<?>, Metadata> cache = new HashMap<Class<?>, Metadata>();
@@ -66,6 +66,12 @@ public class Metadata
 		{
 			setTable(clazz.getSimpleName());
 		}
+	}
+
+	public Field getField(String name)
+	{
+		Property prop = props.get(name);
+		return prop != null ? prop.getField() : null;
 	}
 
 	public static Metadata getMetadata(Class<?> klass)
@@ -136,7 +142,7 @@ public class Metadata
 		String sql = new SQL()
 		{
 			{
-				SELECT("count(*)");
+				SELECT(String.format("count(%s)",metadata.getId().getColumn()));
 				FROM(metadata.getTable());
 			}
 		}.toString();
@@ -266,7 +272,7 @@ public class Metadata
 							}
 							else
 							{
-								Object value = getValue(orig, property.getName());
+								Object value = getValue(orig, property);
 								if (value != null)
 								{
 									SET(String.format("%s = #{%s}", property.getColumn(), property.getName()));
@@ -278,7 +284,7 @@ public class Metadata
 				WHERE(String.format("%s = #{%s}", metadata.getId().getColumn(), metadata.getId().getName()));
 				if (metadata.getVersion() != null)
 				{
-					Object value = getValue(orig, metadata.getVersion().getName());
+					Object value = getValue(orig, metadata.getVersion());
 					if (value != null)
 					{
 						WHERE(String.format("%s = #{%s}", metadata.getVersion().getColumn(), metadata.getVersion().getName()));
@@ -323,7 +329,7 @@ public class Metadata
 				Collection<Property> props = metadata.getProps().values();
 				for (Property p : props)
 				{
-					Object value = getValue(orig, p.getName());
+					Object value = getValue(orig, p);
 					if (value != null)
 					{
 						WHERE(String.format("%s = #{%s}", p.getColumn(), p.getName()));
@@ -348,13 +354,18 @@ public class Metadata
 		return sql;
 	}
 
-	public static Object getValue(Object orig, String name)
+	private static Object getValue(Object orig, Property prop)
 	{
 		try
 		{
-			if (PropertyUtils.isReadable(orig, name))
+			Field field = prop.getField();
+			if (field != null)
 			{
-				return PropertyUtils.getSimpleProperty(orig, name);
+				if (!field.isAccessible())
+				{
+					field.setAccessible(true);
+				}
+				return field.get(orig);
 			}
 		}
 		catch (Throwable e)

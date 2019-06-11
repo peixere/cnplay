@@ -1,7 +1,6 @@
 package cc.cnplay.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -22,15 +21,10 @@ public abstract class SuperIdEntity implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static String randomId()
-	{
-		return UUID.randomUUID().toString();
-	}
-
 	@ApiModelProperty(value = "主键")
 	@Id()
-	@Column(name = "id", unique = true, nullable = false, length = 36)
-	private String id;
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
 
 	@ApiModelProperty(value = "分页查询参数", hidden = true)
 	@Transient
